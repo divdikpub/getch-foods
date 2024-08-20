@@ -1,9 +1,10 @@
 import Button from "@/components/button";
 import { Food } from "./api/foods/route";
 import { Soup } from "lucide-react";
+import FoodButton from "@/components/food-button";
 
 export default async function Home() {
-  const response = await fetch("http://localhost:3000/api/foods");
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/foods`);
   const foods = (await response.json()) as Food[];
 
   return (
@@ -22,9 +23,12 @@ export default async function Home() {
                 currency: "IDR",
               })}
             </div>
+            <FoodButton />
           </div>
         ))}
       </div>
     </main>
   );
 }
+
+export const dynamic = "force-dynamic";
